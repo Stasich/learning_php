@@ -35,18 +35,22 @@ if ($_POST) {                     //если есть данные в POST за�
         $stmt = $pdo->query($query);
         while ($row = $stmt->fetch()) {
             //foreach ( $pdo->query($query) as $row ){
-            echo "<div class = \"comment\">";
-            echo "<div class = \"name\">";
-            echo "$row[name]";
-            echo "</div>";
-            echo "<div class = \"date\">";
-            echo date('G:i d.m.Y', $row['time']);
-            echo "</div>";
-            echo "<div style = \"clear: both\"></div>";
-            echo "<div class = \"text\">";
-            echo "<p>$row[text]</p>";
-            echo "</div>";
-            echo "</div>";
+            $time = date('G:i d.m.Y', $row['time']);
+            echo <<<END
+<div class = "comment">
+            <div class = "name">
+                $row[name]
+            </div>
+            <div class = "date">
+                $time
+            </div>
+            <div style = "clear: both"></div>
+            <div class = "text">
+                <p>$row[text]</p>
+            </div>
+        </div>
+        
+END;
         }
         ?>
         <br>
