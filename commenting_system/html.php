@@ -1,6 +1,5 @@
 <?php
-$query = "SELECT name, text, time FROM comments ORDER BY id ASC"; //запрос комментариев из базы
-$stmt = $pdo->query($query);
+
 echo <<<END
 <!doctype html>
 <html>
