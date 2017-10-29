@@ -1,6 +1,3 @@
-<?php
-
-echo <<<END
 <!doctype html>
 <html>
 <head>
@@ -26,7 +23,8 @@ echo <<<END
 </div>
 <div class="comments">
     <div class="content">
-END;
+
+<?php
 while ($row = $stmt->fetch()) {
 //foreach ( $pdo->query($query) as $row ){
     $time = date('G:i d.m.Y', $row['time']);
@@ -46,7 +44,7 @@ while ($row = $stmt->fetch()) {
         
 END;
         };
-echo <<<END
+?>
 <br>
 <hr>
 <div class="form">
@@ -56,6 +54,7 @@ echo <<<END
         <label>Ваш комментарий</label><br><br>
         <textarea cols="40" rows=10 name="comment" required></textarea>
         <br>
+        <input type="text" name = "token" value = "<?php echo $token?>" hidden>
         <input type="submit" value="Отправить">
     </form>
 </div>
@@ -69,4 +68,3 @@ echo <<<END
 </div>
 </body>
 </html>
-END;

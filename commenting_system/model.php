@@ -17,3 +17,8 @@ function insertComment( $name, $comment, $pdo )
         'time' => $time
     ]);
 }
+
+function getToken()
+{
+    return hash('ripemd160', 'mytime'.time() );
+}
