@@ -1,12 +1,22 @@
 <?php
+require_once ('connectData.php');
+require_once ('model.php');
+
+try {                                                 //подключаюсь к базе                                                                                 // подключаюсь к mysql
+    $pdo = new PDO($dsn, $username, $password);
+} catch (PDOException $e ) {
+    echo "Невозможно установить соединение" . $e->getMessage();
+}
 
 $token = 'Your token';
 $content = file_get_contents("php://input");  //get json data
-$update = json_decode($content, true);  // arr from json
+$update = json_decode($content, true);          // arr from json
 $chat_id = $update['message']['chat']['id'];
 $text = $update['message']['text'];
 //$textToSend = "хуе".mb_substr($text,1);
-$textToSend = "Вы ввели: \"$text\".";
+
+$answer = trim( getAnswer($pdo, $text) );
+$textToSend = $answer;
 
 $urlAnswer = "https://api.telegram.org/bot$token/sendMessage?disable_web_page_preview=true&chat_id=$chat_id&text=$textToSend";
 //file($urlAnswer); //если нет curl
